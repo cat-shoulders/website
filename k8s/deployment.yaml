@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: catshoulder
-          image: ghcr.io/sayjeyhi/catshoulder.dev:latest
+          image: ghcr.io/sayjeyhi/catshoulder-website:latest
           ports:
             - containerPort: 80
 
