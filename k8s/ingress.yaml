@@ -3,15 +3,17 @@ kind: Ingress
 metadata:
   name: catshoulder-ingress
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-prod-new"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+    traefik.ingress.kubernetes.io/router.middlewares: ""
 spec:
   ingressClassName: traefik
   tls:
     - hosts:
         - catshoulder.dev
         - www.catshoulder.dev
-      secretName: catshoulder-tls
+      secretName: catshoulder-tls-v2
   rules:
     - host: catshoulder.dev
       http:
@@ -22,4 +24,14 @@ spec:
               service:
                 name: catshoulder-service
                 port:
-                  number: 80
+                  number: 8080
+    - host: www.catshoulder.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: catshoulder-service
+                port:
+                  number: 8080

@@ -18,6 +18,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Kubernetes set context
+        uses: Azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
       - name: Set commit SHA short
         run: |
           echo "COMMIT_SHA_SHORT=${GITHUB_SHA::8}" >> $GITHUB_ENV
@@ -62,12 +68,6 @@ jobs:
             ghcr.io/${{ env.REPOSITORY_NAME }}:${{ env.CURRENT_DATE }}
             ghcr.io/${{ env.REPOSITORY_NAME }}:latest
 
-      - name: Kubernetes set context
-        uses: Azure/k8s-set-context@v3
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}
-
       - name: Deploy
         uses: Azure/k8s-deploy@v5.0.1
         with:
@@ -76,8 +76,8 @@ jobs:
           imagepullsecrets: |
             dockerconfigjson-github-com
           manifests: |
-            ./k8s/cert.yaml
             ./k8s/deployment.yaml
             ./k8s/service.yaml
             ./k8s/ingress.yaml
+            ./k8s/middleware.yaml
           images: ghcr.io/${{ env.REPOSITORY_NAME }}:${{ env.COMMIT_SHA_SHORT }}
