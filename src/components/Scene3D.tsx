@@ -49,7 +49,7 @@ const Scene3D = () => {
     });
 
     // Image Sphere
-    const texture = new THREE.TextureLoader().load('./2025-avatar.jpeg');
+    const texture = new THREE.TextureLoader().load('https://avatars.githubusercontent.com/u/201720171');
     const imageMesh = new THREE.Mesh(
       new THREE.SphereGeometry(3, 64, 64, 0, -Math.PI, 0, Math.PI),
       new THREE.MeshBasicMaterial({ map: texture, transparent: true }),
