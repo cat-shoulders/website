@@ -68,7 +68,7 @@ jobs:
             ghcr.io/${{ env.REPOSITORY_NAME }}:${{ env.CURRENT_DATE }}
             ghcr.io/${{ env.REPOSITORY_NAME }}:latest
 
-      - name: Deploy
+      - name: Deploy manifests
         uses: Azure/k8s-deploy@v5.0.1
         with:
           action: deploy
@@ -80,7 +80,11 @@ jobs:
             ./k8s/service.yaml
             ./k8s/ingress.yaml
             ./k8s/middleware.yaml
-          images: ghcr.io/${{ env.REPOSITORY_NAME }}:${{ env.COMMIT_SHA_SHORT }}
 
-      - name: Restart deployment to ensure new image is pulled
-        run: kubectl rollout restart deployment/catshoulder
+      - name: Update deployment image to commit SHA
+        run: |
+          kubectl set image deployment/catshoulder catshoulder=ghcr.io/${{ env.REPOSITORY_NAME }}:${{ env.COMMIT_SHA_SHORT }}
+
+      - name: Wait for rollout to complete
+        run: |
+          kubectl rollout status deployment/catshoulder --timeout=5m
