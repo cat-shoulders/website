@@ -81,3 +81,6 @@ jobs:
             ./k8s/ingress.yaml
             ./k8s/middleware.yaml
           images: ghcr.io/${{ env.REPOSITORY_NAME }}:${{ env.COMMIT_SHA_SHORT }}
+
+      - name: Restart deployment to ensure new image is pulled
+        run: kubectl rollout restart deployment/catshoulder

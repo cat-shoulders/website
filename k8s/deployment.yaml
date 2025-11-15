@@ -14,9 +14,12 @@ spec:
       labels:
         app: catshoulder
     spec:
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
       containers:
         - name: catshoulder
           image: ghcr.io/sayjeyhi/catshoulder-website:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
 
