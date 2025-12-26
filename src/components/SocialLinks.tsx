@@ -36,7 +36,8 @@ const SocialLinks = () => {
           </a>
         ))}
       </div>
-      <div className="text-center fade-in-delay-3 mt-4 text-gray-600 text-sm">
+      <div class="text-center fade-in-delay-3 mt-4 text-gray-600 text-sm">info@catshoulder.dev</div>
+      <div className="text-center fade-in-delay-3 mt-4 text-gray-600 text-xs">
       Sound Effect by <a href="https://pixabay.com/users/yoursperfectguy-46268990/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=246012">Abby</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=246012">Pixabay</a>
       </div>
     </>
