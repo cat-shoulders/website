@@ -9,6 +9,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/molentje/privacy-policy" element={<MolentjePrivacyPolicy />} />
+        <Route path="/game/privacy-policy" element={<MolentjePrivacyPolicy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
